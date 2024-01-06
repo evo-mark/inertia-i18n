@@ -18,7 +18,6 @@
     <a href="https://packagist.org/packages/evo-mark/inertia-i18n">
         <img src="https://img.shields.io/packagist/l/evo-mark/inertia-i18n" alt="License">
     </a>
-    <img src="https://github.com/evo-mark/inertia-i18n/actions/workflows/tests.yml/badge.svg?branch=main">
 </p>
 
 # Inertia I18n
@@ -39,7 +38,7 @@ pnpm add ./vendor/evo-mark/inertia-i18n
 import InertiaI18n from "inertia-i18n/vite";
 
 export default {
-    plugins: [InertiaI18n()],
+  plugins: [InertiaI18n()],
 };
 ```
 
@@ -47,13 +46,13 @@ export default {
 import useInertiaI18nVue from "inertia-i18n/vue";
 
 createInertiaApp({
-    setup({ el, App, props, plugin }) {
-        const inertiaI18nPlugin = useInertiaI18nVue(props);
+  setup({ el, App, props, plugin }) {
+    const inertiaI18nPlugin = useInertiaI18nVue(props);
 
-        createSSRApp({ render: () => h(App, props) })
-            .use(plugin)
-            .use(inertiaI18nPlugin)
-            .mount(el);
-    },
+    createSSRApp({ render: () => h(App, props) })
+      .use(plugin)
+      .use(inertiaI18nPlugin)
+      .mount(el);
+  },
 });
 ```
