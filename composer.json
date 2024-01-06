@@ -1,0 +1,27 @@
+{
+    "name": "evo-mark/inertia-i18n",
+    "description": "Internationalisation support for Inertia projects",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Craig Riley",
+            "email": "c.riley@evomark.co.uk"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "EvoMark\\InertiaI18n\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "EvoMark\\InertiaI18n\\Provider"
+            ]
+        }
+    },
+    "require-dev": {
+        "orchestra/testbench": "^8.19"
+    }
+}

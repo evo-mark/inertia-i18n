@@ -1,0 +1,26 @@
+{
+    "name": "inertia-i18n",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "type": "module",
+    "exports": {
+        ".": "./resources/js/index.js",
+        "./vite": "./resources/vite-plugin/index.js",
+        "./vue": "./resources/vue/index.js"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "Evo Mark Ltd",
+    "license": "MIT",
+    "dependencies": {
+        "php-parser": "^3.1.5",
+        "vite-plugin-full-reload": "^1.1.0",
+        "vue-i18n": "^9.8.0"
+    },
+    "peerDependencies": {
+        "@inertiajs/vue3": ">=1.0.0"
+    }
+}
