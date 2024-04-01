@@ -56,3 +56,28 @@ createInertiaApp({
   },
 });
 ```
+
+## Usage
+
+After installation, you can use your frontend localisation package as usual:
+
+```html
+<template>
+    <div>{{ $t('messages.hello_world') }}</div>
+</template>
+```
+
+OR
+
+```js
+<script setup>
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
+const translated = computed(() => t('message.hello_world));
+</script>
+```
+
+See the documentation for the respective frontend packages for more information:
+
+Vue: [vue-i18n](https://vue-i18n.intlify.dev/)
