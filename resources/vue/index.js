@@ -17,6 +17,7 @@ const resolveLang = (locale) => {
 
 export default (props) => {
     let currentLocale = props.initialPage.props.i18n.current;
+    const fallbackLocale = props.initialPage.props.i18n.default;
 
     return {
         install: (app, config = {}) => {
@@ -25,9 +26,12 @@ export default (props) => {
             i18n = createI18n({
                 legacy: isLegacy,
                 locale: currentLocale,
-                fallbackLocale: props.initialPage.props.i18n.default,
+                fallbackLocale,
             });
             loadLocaleMessages(currentLocale);
+            if (currentLocale !== fallbackLocale) {
+                loadLocaleMessages(fallbackLocale);
+            }
             app.use(i18n);
 
             router.on("navigate", async (ev) => {
