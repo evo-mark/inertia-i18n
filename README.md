@@ -48,6 +48,8 @@ import useInertiaI18nVue from "inertia-i18n/vue";
 createInertiaApp({
   setup({ el, App, props, plugin }) {
     const inertiaI18nPlugin = useInertiaI18nVue(props);
+    // Optional, but you may get warnings without this
+    await inertiaI18nPlugin.load();
 
     createSSRApp({ render: () => h(App, props) })
       .use(plugin)
