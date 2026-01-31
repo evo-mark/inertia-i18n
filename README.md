@@ -31,7 +31,7 @@ composer require evo-mark/inertia-i18n
 ```sh
 npm install ./vendor/evo-mark/inertia-i18n
 --
-pnpm add ./vendor/evo-mark/inertia-i18n
+pnpm add file:vendor/evo-mark/inertia-i18n
 ```
 
 ```js
@@ -46,7 +46,7 @@ export default {
 import useInertiaI18nVue from "inertia-i18n/vue";
 
 createInertiaApp({
-  setup({ el, App, props, plugin }) {
+  async setup({ el, App, props, plugin }) {
     const inertiaI18nPlugin = useInertiaI18nVue(props);
     // Optional, but you may get warnings without this
     await inertiaI18nPlugin.load();
@@ -65,7 +65,7 @@ After installation, you can use your frontend localisation package as usual:
 
 ```html
 <template>
-    <div>{{ $t('messages.hello_world') }}</div>
+  <div>{{ $t('messages.hello_world') }}</div>
 </template>
 ```
 
