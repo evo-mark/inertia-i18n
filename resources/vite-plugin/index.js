@@ -2,6 +2,15 @@ import { resolveConfig } from "./config.js";
 import { hasPhpTranslations } from "./analyse.js";
 import { parseAll } from "./parse.js";
 
+/**
+ * @typedef { object } InertiaI18nConfig
+ * @property { string } langDirectory The root of PHP language folders
+ * @property { string } outputDirectory The directory to output your JSON messages files
+ */
+
+/**
+ * @param { InertiaI18nConfig } userConfig The user config object
+ */
 export default (userConfig = {}) => {
 	const config = resolveConfig(userConfig);
 	const shouldProcess = hasPhpTranslations(config.langDirectory);
@@ -15,6 +24,9 @@ export default (userConfig = {}) => {
 					alias: {
 						"inertia-i18n-files": config.outputDirectory,
 					},
+				},
+				ssr: {
+					noExternal: ["inertia-i18n"],
 				},
 			}),
 			handleHotUpdate({ file, server }) {

@@ -3,23 +3,25 @@
 namespace EvoMark\InertiaI18n\Middleware;
 
 use Closure;
-use EvoMark\InertiaI18n\Services\MessageService;
-use Inertia\Inertia;
 use Illuminate\Support\Facades\App;
+use Inertia\Inertia;
+
+use function Illuminate\Filesystem\join_paths;
 
 class InertiaMiddleware
 {
     public function handle($request, Closure $next)
     {
-        $firstLoadOnlyProps = $request->inertia() ? null : function () use ($request) {
+        $firstLoadOnlyProps = $request->inertia() ? null : function () {
             $locales = collect([App::currentLocale(), App::getFallbackLocale()])->unique();
             $messages = collect();
+            $basePath = config('inertia-i18n.path', lang_path());
 
             foreach ($locales as $locale) {
                 if ($messages->has($locale)) {
                     continue;
                 }
-                $file = lang_path('php_' . $locale . '.json');
+                $file = join_paths($basePath, 'php_'.$locale.'.json');
                 $messages->put($locale, json_decode(file_get_contents($file), associative: true));
             }
 
@@ -30,7 +32,7 @@ class InertiaMiddleware
             return [
                 'current' => App::currentLocale(),
                 'default' => config('app.fallback_locale'),
-                'messages' => $firstLoadOnlyProps
+                'messages' => $firstLoadOnlyProps,
             ];
         });
 

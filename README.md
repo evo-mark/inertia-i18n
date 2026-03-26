@@ -22,6 +22,10 @@
 
 # Inertia I18n
 
+## Upgrading from V2
+
+Please see the CHANGELOG.md file for upgrade instructions
+
 ## Installation
 
 ```sh
@@ -30,7 +34,7 @@ composer require evo-mark/inertia-i18n
 
 ```sh
 npm install ./vendor/evo-mark/inertia-i18n
---
+
 pnpm add file:vendor/evo-mark/inertia-i18n
 ```
 
@@ -43,20 +47,21 @@ export default {
 ```
 
 ```js
-import useInertiaI18nVue from "inertia-i18n/vue";
+import { inertiaI18nVue } from "inertia-i18n/vue";
 
 createInertiaApp({
-  async setup({ el, App, props, plugin }) {
-    const inertiaI18nPlugin = useInertiaI18nVue(props);
-    // Optional, but you may get warnings without this
-    await inertiaI18nPlugin.load();
-
-    createSSRApp({ render: () => h(App, props) })
-      .use(plugin)
-      .use(inertiaI18nPlugin)
-      .mount(el);
+  withApp(app) {
+    app.use(inertiaI18nVue);
   },
 });
+```
+
+## Config
+
+You can publish the config, if necessary, with Artisan:
+
+```sh
+php artisan v:p --tag=inertia-i18n
 ```
 
 ## Usage
