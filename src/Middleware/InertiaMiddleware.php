@@ -11,22 +11,26 @@ class InertiaMiddleware
 {
     public function handle($request, Closure $next)
     {
-        $locales = collect([App::currentLocale(), App::getFallbackLocale()])->unique();
-        $json = null;
+        $firstLoadOnlyProps = $request->inertia() ? null : function () use ($request) {
+            $locales = collect([App::currentLocale(), App::getFallbackLocale()])->unique();
+            $messages = collect();
 
-        foreach ($locales as $locale) {
-            $file = lang_path('php_' . $locale . '.json');
-            $json = json_decode(file_get_contents($file), associative: true);
-            if (!empty($json)) {
-                break;
+            foreach ($locales as $locale) {
+                if ($messages->has($locale)) {
+                    continue;
+                }
+                $file = lang_path('php_' . $locale . '.json');
+                $messages->put($locale, json_decode(file_get_contents($file), associative: true));
             }
-        }
 
-        Inertia::share('i18n', function () use ($json) {
+            return $messages;
+        };
+
+        Inertia::share('i18n', function () use ($firstLoadOnlyProps) {
             return [
                 'current' => App::currentLocale(),
                 'default' => config('app.fallback_locale'),
-                'messages' => $json
+                'messages' => $firstLoadOnlyProps
             ];
         });
 

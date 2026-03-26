@@ -34,7 +34,7 @@ export default (props) => {
       })
     },
     install: (app, config = {}) => {
-      console.log(app)
+      console.log(app.config.globalProperties.$page?.props?.i18n)
       const isLegacy = config.legacy === true
 
       i18n = createI18n({
