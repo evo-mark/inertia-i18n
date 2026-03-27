@@ -69,6 +69,8 @@ You can publish the config, if necessary, with Artisan:
 php artisan v:p --tag=inertia-i18n
 ```
 
+Your `path` should match the `outputDirectory` in your Vite plugin config (default `/lang`)
+
 ## Usage
 
 After installation, you can use your frontend localisation package as usual:
