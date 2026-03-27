@@ -42,7 +42,12 @@ pnpm add file:vendor/evo-mark/inertia-i18n
 import InertiaI18n from "inertia-i18n/vite";
 
 export default {
-  plugins: [InertiaI18n()],
+	plugins: [
+		InertiaI18n({
+			// langDirectory: resolve(process.cwd() + "/lang"),
+			// outputDirectory: resolve(process.cwd() + "/lang/json"),
+		}),
+	],
 };
 ```
 
@@ -50,9 +55,9 @@ export default {
 import { inertiaI18nVue } from "inertia-i18n/vue";
 
 createInertiaApp({
-  withApp(app) {
-    app.use(inertiaI18nVue);
-  },
+	withApp(app) {
+		app.use(inertiaI18nVue);
+	},
 });
 ```
 
@@ -70,7 +75,7 @@ After installation, you can use your frontend localisation package as usual:
 
 ```html
 <template>
-  <div>{{ $t('messages.hello_world') }}</div>
+	<div>{{ $t('messages.hello_world') }}</div>
 </template>
 ```
 
