@@ -14,6 +14,34 @@ createInertiaApp({
 });
 ```
 
+- **Breaking**: The plugin is now installed directly rather than using a factory function. There is also no longer a `load` function to `await`. This is no longer necessary.
+
+BEFORE
+```js
+createInertiaApp({
+	resolve: createInertiaPageResolver(import.meta.glob("./pages/**/*.vue")),
+	async setup({ el, App, props, plugin }) {
+		const inertiaI18nPlugin = useInertiaI18nVue(props);
+
+		await inertiaI18nPlugin.load();
+
+		createSSRApp({ render: () => h(App, props) })
+			.use(plugin)
+			.use(inertiaI18nPlugin)
+			.mount(el);
+	},
+});
+```
+
+AFTER
+```js
+createInertiaApp({
+	withApp(app) {
+		app.use(inertiaI18nVue);
+	},
+});
+```
+
 - **Breaking**: If your messages are _not_ in the default location (e.g. `lang/php_en.json`), then you'll need to publish the config with Artisan and set your path there. This should match the one passed to the Vite plugin.
 
 ```sh
