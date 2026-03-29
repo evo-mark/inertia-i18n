@@ -1,5 +1,33 @@
 # Changelog
 
+## Version 3.1.0
+
+- **Feature**: New `apps` config option for if you need to use multiple locations for your I18n files
+
+```php
+// config/inertia-i18n.php
+return [
+    'apps' => [
+        'frontend' => [
+            'path' => lang_path('json')
+        ]
+    ]
+];
+```
+
+And then anywhere in your code before Inertia props are resolved, call the following:
+
+```php
+use EvoMark\InertiaI18n\InertiaI18n;
+
+public function boot(): void
+{
+	InertiaI18n::setApp('frontend');
+}
+```
+
+Your Inertia middleware might also be a good place to call this method.
+
 ## Version 3.0.0
 
 - **Breaking**: The Vue plugin is now a named export, and should be imported like:
@@ -17,6 +45,7 @@ createInertiaApp({
 - **Breaking**: The plugin is now installed directly rather than using a factory function. There is also no longer a `load` function to `await`. This is no longer necessary.
 
 BEFORE
+
 ```js
 createInertiaApp({
 	resolve: createInertiaPageResolver(import.meta.glob("./pages/**/*.vue")),
@@ -34,6 +63,7 @@ createInertiaApp({
 ```
 
 AFTER
+
 ```js
 createInertiaApp({
 	withApp(app) {

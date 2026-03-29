@@ -14,6 +14,10 @@ class Provider extends ServiceProvider
             path: __DIR__.'/config.php',
             key: 'inertia-i18n'
         );
+
+        $this->app->singleton(InertiaI18nService::class, function () {
+            return new InertiaI18nService;
+        });
     }
 
     /**

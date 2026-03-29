@@ -3,6 +3,7 @@
 namespace EvoMark\InertiaI18n\Middleware;
 
 use Closure;
+use EvoMark\InertiaI18n\InertiaI18n;
 use Illuminate\Support\Facades\App;
 use Inertia\Inertia;
 
@@ -15,7 +16,7 @@ class InertiaMiddleware
         $firstLoadOnlyProps = $request->inertia() ? null : function () {
             $locales = collect([App::currentLocale(), App::getFallbackLocale()])->unique();
             $messages = collect();
-            $basePath = config('inertia-i18n.path', lang_path());
+            $basePath = InertiaI18n::getLangRoot();
 
             foreach ($locales as $locale) {
                 if ($messages->has($locale)) {
