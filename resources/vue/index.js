@@ -21,8 +21,8 @@ const lang =
  */
 const loadFromPageProps = (state) => {
 	if (state?.current) {
-		currentLocale.value = state.current;
-		fallbackLocale.value = state.default;
+		i18n.global.locale.value = currentLocale.value = state.current;
+		i18n.global.fallbackLocale.value = fallbackLocale.value = state.default;
 	}
 	if (state?.messages && i18n?.global) {
 		messages.value = messages.value ? Object.assign(messages.value, state.messages) : state.messages;
